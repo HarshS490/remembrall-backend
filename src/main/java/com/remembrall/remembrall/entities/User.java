@@ -4,20 +4,23 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.UUID;
 
 @Entity
-@Table(name="user", indexes = @Index(columnList = "username", name="username_index"))
-@Getter @Setter
+@Table(name = "\"user\"", indexes = @Index(columnList = "username", name = "username_index"))
+@Getter
+@Setter
 @ToString
 @EqualsAndHashCode
-@NoArgsConstructor @AllArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id")
+    private UUID id;
 
-    @Column(unique=true, nullable = false, name = "username")
+    @Column(unique = true, nullable = false, name = "username")
     private String username;
 
     @Column(nullable = false, name = "createdAt")
@@ -26,11 +29,9 @@ public class User {
     @Column(nullable = false, name = "updatedAt")
     private LocalDate updatedAt;
 
-    @Column(nullable = false, name = "followers")
-    @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
-    private ArrayList<User> followers;
-
-    @Column(nullable = false, name="following")
-    @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
-    private ArrayList<User> following;
+    public User(String username, LocalDate createdAt, LocalDate updatedAt) {
+        this.username = username;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
 }

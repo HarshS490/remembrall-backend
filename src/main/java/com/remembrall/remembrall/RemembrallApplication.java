@@ -20,6 +20,7 @@ public class RemembrallApplication {
 			@Override
 			public void addCorsMappings(@NonNull CorsRegistry registry) {
 				registry.addMapping("/").allowedOrigins("http://localhost:5173");
+				registry.addMapping("/user/**").allowedOrigins("http://localhost:5173");
 			}
 		};
 	}
