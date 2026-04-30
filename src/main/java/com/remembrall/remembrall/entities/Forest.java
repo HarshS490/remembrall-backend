@@ -3,7 +3,8 @@ package com.remembrall.remembrall.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
+
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -27,6 +28,11 @@ public class Forest {
     private String description;
 
     @Column(name = "roles", nullable = false)
-    private ArrayList<String> roles;
+    private List<String> roles;
 
+    public Forest(String name, String description, List<String> roles) {
+        this.name = name;
+        this.description = description;
+        this.roles = roles;
+    }
 }

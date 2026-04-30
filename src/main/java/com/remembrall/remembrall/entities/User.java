@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -29,9 +30,14 @@ public class User {
     @Column(nullable = false, name = "updatedAt")
     private LocalDate updatedAt;
 
-    public User(String username, LocalDate createdAt, LocalDate updatedAt) {
+    @Column(name = "forests")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "id")
+    private List<Forest> forests;
+
+    public User(String username, LocalDate createdAt, LocalDate updatedAt, List<Forest> forests) {
         this.username = username;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.forests = forests;
     }
 }

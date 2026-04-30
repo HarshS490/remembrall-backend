@@ -4,13 +4,16 @@ import com.remembrall.remembrall.dto.UserDto;
 import com.remembrall.remembrall.entities.User;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+
 @Component
 public class UserMapper {
     public User transformUserDtoToUser(UserDto userDto) {
         return new User(
                 userDto.username(),
                 null,
-                null
+                null,
+                new ArrayList<>()
         );
     }
     public UserDto transformUserToUserDto(User user) {
